@@ -8,14 +8,14 @@
     <h1><%= listing.title %></h1>
   </div>
   <div class="card listing-card col-6 offset-3 show-card">
-    <img
+     <img
       src="<%= listing.image.url %>"
       alt="Listing_image"
       class="card-img-top show-img"
     />
     <div class="card-body">
       <div class="card-text">
-        <p>Owned by <i> <%= listing.owner.username %> </i></p>
+        <p>Owned by <i> <%= listing.owner ? listing.owner.username : "Anonymous" %> </i></p>
 
         <p><%= listing.description %></p>
 
@@ -25,14 +25,14 @@
 
         <p><%= listing.location %></p>
       </div>
-      <% if( currUser && listing.owner._id.equals(currUser._id)){ %>
+      <% if( currUser && listing.owner && listing.owner._id.equals(currUser._id)){ %>
       <div class="btns">
-        <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark edit-btn"
+        <a href="/<%=listing._id%>/edit" class="btn btn-dark edit-btn"
           >Edit</a
         >
 
-        <form method="post" action="/listings/<%=listing._id%>?_method=DELETE">
-          <button class="btn btn-dark offset-3">Delete</button>
+        <form method="post" action="/<%=listing._id%>?_method=DELETE">
+          <button class="btn btn-dark">Delete</button>
         </form>
       </div>
 
@@ -43,7 +43,7 @@
       <% if(currUser){ %>
       <form
         method="post"
-        action="/listings/<%=listing._id%>/reviews"
+        action="/<%=listing._id%>/reviews"
         novalidate
         class="needs-validation"
       >
@@ -84,6 +84,7 @@
               id="first-rate5"
               name="review[rating]"
               value="5"
+              checked
             />
             <label for="first-rate5" title="Amazing">5 stars</label>
           </fieldset>
@@ -116,7 +117,7 @@
           <p class="card-text"><%=review.comment%></p>
           <form
             method="post"
-            action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"
+            action="/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"
           >
             <button class="btn btn-sm btn-dark">Delete</button>
           </form>

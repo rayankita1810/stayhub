@@ -15,10 +15,10 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
-
+const userRouter = require("./routes/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
-const userRouter = require("./routes/user.js");
+
 let dburl = process.env.ATLASDB_URL;
 async function main() {
   await mongoose.connect(dburl);
@@ -28,10 +28,6 @@ main()
     console.log("connected to db");
   })
   .catch((err) => console.log(err));
-
-
-
-
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -43,7 +39,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 const store = new MongoStore({
     mongoUrl: dburl,
     crypto: {
-      secret:"mysupersecretcode"
+      secret:process.env.SECRET,
     },
     touchAfter:24*3600,
   });
@@ -52,7 +48,7 @@ store.on("error", ()=>{
 })
 const sessionOption = {
   store,
-  secret: "mysupersecretcode",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -83,10 +79,10 @@ app.use((req, res, next) => {
   res.locals.currUser = req.user;
   next();
 });
-
-app.use("/listings", listingRouter);
-app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+app.use("/", listingRouter);
+app.use("/:id/reviews", reviewRouter);
+
 
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page not found!"));

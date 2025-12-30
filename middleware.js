@@ -22,7 +22,7 @@ module.exports.isOwner = async (req, res, next) => {
   let listing = await Listing.findById(id);
   if (!listing.owner._id.equals(res.locals.currUser._id)) {
     req.flash("error", "You dont have permission to edit or delete this listing!");
-    return res.redirect(`/listings/${id}`);
+    return res.redirect(`/${id}`);
   }
   next();
 };
@@ -40,7 +40,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   let review = await Review.findById(reviewId);
   if (!review.author.equals(res.locals.currUser._id)) {
     req.flash("error", "You dont have permission to edit or delete this review!");
-    return res.redirect(`/listings/${id}`);
+    return res.redirect(`/${id}`);
   }
   next();
 };

@@ -38,10 +38,10 @@ const listingSchema = new Schema({
       required: true
     }
   },
-  // category:{
-  //   type:String,
-  //   enum:["mountains","arctic","farms", "deserts"],
-  // }
+  category:{
+    type:String,
+    enum:["trending","rooms","iconic cities","mountains","castles","amazing pools","camping","farms","arctic","heritage","houseboats","deserts"],
+  }
 });
 listingSchema.post("findOneAndDelete",async(listing)=>{
   if(listing){await Review.deleteMany({_id:{$in:listing.reviews}});}

@@ -13,7 +13,7 @@ module.exports.signup = async (req, res) => {
         return next(err);
       }
       req.flash("success", "Welcome to Stayhub");
-      res.redirect("/listings");
+      res.redirect("/");
     });
   } catch (err) {
     req.flash("error", err.message);
@@ -25,7 +25,7 @@ module.exports.getLoginPage = (req, res) => {
 };
 module.exports.login = async (req, res) => {
   req.flash("success", "Welcome Back!You are succesfully logged in!");
-  let redirectUrl = res.locals.redirectUrl || "/listings";
+  let redirectUrl = res.locals.redirectUrl || "/";
   res.redirect(redirectUrl);
 };
 module.exports.logout = (req, res) => {
@@ -34,6 +34,6 @@ module.exports.logout = (req, res) => {
       return next(err);
     }
     req.flash("success", "You are logged out now!");
-    res.redirect("/listings");
+    res.redirect("/");
   });
 };
