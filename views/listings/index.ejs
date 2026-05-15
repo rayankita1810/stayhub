@@ -1,120 +1,484 @@
 <% layout("/layouts/boilerplate") %>
-<div id="filters">
-  <div class="filter" onclick="filterByCategory('trending')">
-    <div><i class="fa-solid fa-fire"></i></div>
-    <p>Trending</p>
+
+<!-- FILTER HEADER -->
+<div class="filters-wrapper">
+
+  <!-- FILTERS -->
+  <div id="filters">
+
+    <div class="filter" onclick="filterByCategory('trending')">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('rooms')">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('iconic cities')">
+      <i class="fa-solid fa-city"></i>
+      <p>Iconic Cities</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('mountains')">
+      <i class="fa-solid fa-mountain"></i>
+      <p>Mountains</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('castles')">
+      <i class="fa-brands fa-fort-awesome"></i>
+      <p>Castles</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('amazing pools')">
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Pools</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('camping')">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('farms')">
+      <i class="fa-solid fa-cow"></i>
+      <p>Farms</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('arctic')">
+      <i class="fa-regular fa-snowflake"></i>
+      <p>Arctic</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('heritage')">
+      <i class="fa-solid fa-landmark"></i>
+      <p>Heritage</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('houseboats')">
+      <i class="fa-solid fa-ship"></i>
+      <p>Houseboats</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('deserts')">
+      <i class="fa-solid fa-sun"></i>
+      <p>Deserts</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('beach')">
+      <i class="fa-solid fa-umbrella-beach"></i>
+      <p>Beach</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('city')">
+      <i class="fa-solid fa-building"></i>
+      <p>City</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('island')">
+      <i class="fa-solid fa-water"></i>
+      <p>Island</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('forest')">
+      <i class="fa-solid fa-tree"></i>
+      <p>Forest</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('river')">
+      <i class="fa-solid fa-water"></i>
+      <p>River</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('snow')">
+      <i class="fa-regular fa-snowflake"></i>
+      <p>Snow</p>
+    </div>
+
+    <div class="filter" onclick="filterByCategory('coastal')">
+      <i class="fa-solid fa-anchor"></i>
+      <p>Coastal</p>
+    </div>
+
   </div>
-  <div class="filter" onclick="filterByCategory('rooms')">
-    <div><i class="fa-solid fa-bed"></i></div>
-    <p>Rooms</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('iconic cities')">
-    <div><i class="fa-solid fa-mountain-city"></i></div>
-    <p>Iconic Cities</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('mountains')">
-    <div><i class="fa-solid fa-mountain"></i></div>
-    <p>Mountains</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('castles')">
-    <div><i class="fa-brands fa-fort-awesome"></i></div>
-    <p>Castles</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('amazing pools')">
-    <div><i class="fa-solid fa-person-swimming"></i></div>
-    <p>Amazing Pools</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('camping')">
-    <div><i class="fa-solid fa-campground"></i></div>
-    <p>Camping</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('farms')">
-    <div><i class="fa-solid fa-cow"></i></div>
-    <p>Farms</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('arctic')">
-    <div><i class="fa-regular fa-snowflake"></i></div>
-    <p>Arctic</p>
-  </div>
-  <!-- new3 -->
-  
-  <div class="filter" onclick="filterByCategory('heritage')">
-    <div><i class="fa-solid fa-place-of-worship"></i></div>
-    <p>Heritage</p>
-  </div>
-  <div class="filter" onclick="filterByCategory('house boats')">
-    <div><i class="fa-solid fa-anchor"></i></div>
-    <p>House Boats</p>
-  </div>
-  
+
+  <!-- TAX TOGGLE -->
   <div class="tax-toggle">
-    <div class="form-check-reverse form-switch">
+
+    <div class="form-check form-switch m-0">
+
       <input
         class="form-check-input"
         type="checkbox"
         role="switch"
         id="flexSwitchCheckDefault"
       />
-      <label class="form-check-label" for="flexSwitchCheckDefault"
-        >Display total after taxes</label
-      >
-    </div>
-  </div>
-</div>
-<!-- <h1>All listings</h1> -->
-<!-- <form method="get" action="/listing/new">
-      <button>Add New Listing</button>
-    </form> -->
 
-<!-- Adding here logic for showing custom message when no room in that category exists -->
-<% if (allListings.length === 0) { %>
-  <div class="alert alert-warning text-center mt-5">
-    <h5>No stay available</h5>
-    <% if (selectedCategory) { %>
-      <p>in <strong><%= selectedCategory %></strong> category</p>
-    <% } %>
+      <label
+        class="form-check-label"
+        for="flexSwitchCheckDefault"
+      >
+        Taxes
+      </label>
+
+    </div>
+
   </div>
+
+</div>
+
+<!-- EMPTY STATE -->
+<% if (allListings.length === 0) { %>
+
+<div class="empty-state">
+
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png"
+    alt="No Listings"
+  />
+
+  <h3>No stays found</h3>
+
+  <% if(selectedCategory){ %>
+
+  <p>
+    No listings available in
+    <strong><%= selectedCategory %></strong>
+  </p>
+
+  <% } %>
+
+</div>
+
 <% } %>
 
-<!-- end -->
- 
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-  <% for(let listing of allListings){ %>
-  <a href="<%=listing._id%>" class="listing-link">
-    <div class="card listing-card">
-      <img
-        src="<%= listing.image.url %>"
-        class="card-img-top"
-        alt="listing_img"
-        style="height: 20rem"
-      />
-      <div class="card-img-overlay"></div>
-      <div class="card-body">
-        <h5 class="card-title"><%= listing.title %></h5>
-        <p class="card-text">
-          &#8377;<%= listing.price?.toLocaleString("en-IN")||"N/A" %> / night
-          <i class="tax-info">&nbsp; +18%GST</i>
-        </p>
-      </div>
-    </div>
-  </a>
-  <% } %>
-</div>
-<script>
-  let taxswitch=document.getElementById("flexSwitchCheckDefault");
+<!-- LISTINGS -->
+<div class="listing-grid">
 
-  taxswitch.addEventListener("click", ()=>{
-    let taxinfos = document.getElementsByClassName("tax-info");
-    // console.log(taxinfos);
-    for(let info of taxinfos){
-      if(info.style.display=="inline"){
-        info.style.display="none";
-      }else{
-        info.style.display="inline";
-      }
-    }
-  });
-  function filterByCategory(category) {
-    window.location.href = `?category=${category}`;
+  <% for(let listing of allListings){ %>
+
+  <a href="/<%= listing._id %>" class="listing-link">
+
+    <div class="listing-card">
+
+      <!-- IMAGE -->
+      <div class="image-wrapper">
+
+        <img
+          src="<%= listing.image.url.replace('/upload','/upload/w_700,q_auto,f_auto') %>"
+          alt="listing_img"
+          class="listing-image"
+          loading="lazy"
+        />
+
+        <div class="wishlist-btn">
+          <i class="fa-regular fa-heart"></i>
+        </div>
+
+      </div>
+
+      <!-- CONTENT -->
+      <div class="listing-content">
+
+        <div class="top-info">
+
+          <h5><%= listing.title %></h5>
+
+          <span class="rating">
+            <i class="fa-solid fa-star"></i>
+            4.9
+          </span>
+
+        </div>
+
+        <p class="location">
+          <%= listing.location %>, <%= listing.country %>
+        </p>
+
+        <p class="distance">
+          Available now
+        </p>
+
+        <p class="price">
+
+          <span>
+            ₹<%= listing.price?.toLocaleString("en-IN") || "N/A" %>
+          </span>
+
+          night
+
+          <span class="tax-info">
+            +18% GST
+          </span>
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </a>
+
+  <% } %>
+
+</div>
+
+<style>
+
+/* PAGE */
+body{
+  background:#fff;
+}
+
+/* MINI HEADER */
+.filters-wrapper{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  padding: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid #efefef;
+}
+
+/* FILTERS */
+#filters{
+  display:flex;
+  overflow-x:auto;
+  gap:0.9rem;
+  scrollbar-width:none;
+  flex:1;
+  padding:0;
+}
+
+#filters::-webkit-scrollbar{
+  display:none;
+}
+
+/* FILTER */
+.filter{
+  min-width:max-content;
+  text-align:center;
+  opacity:0.72;
+  cursor:pointer;
+  transition:0.2s ease;
+  padding:0.15rem 0;
+  border-bottom:2px solid transparent;
+}
+
+.filter:hover{
+  opacity:1;
+}
+
+.filter i{
+  font-size:0.85rem;
+  margin-bottom:0.05rem;
+}
+
+.filter p{
+  margin:0;
+  font-size:0.62rem;
+  font-weight:500;
+  white-space:nowrap;
+  line-height:1;
+}
+
+/* TAX */
+.tax-toggle{
+  border:1px solid #ddd;
+  border-radius:2rem;
+  padding:0.32rem 0.7rem;
+  background:white;
+  white-space:nowrap;
+  font-size:0.72rem;
+}
+
+/* 4 COLUMN GRID */
+.listing-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.3rem;
+  margin-top:1rem;
+}
+
+/* LINK */
+.listing-link{
+  text-decoration:none;
+  color:black;
+}
+
+/* CARD */
+.listing-card{
+  width:100%;
+  transition:0.3s ease;
+}
+
+.listing-card:hover{
+  transform:scale(1.015);
+}
+
+/* IMAGE */
+.image-wrapper{
+  position:relative;
+}
+
+.listing-image{
+  width:100%;
+  height:15rem;
+  object-fit:cover;
+  border-radius:1rem;
+  background:#f1f1f1;
+}
+
+/* HEART */
+.wishlist-btn{
+  position:absolute;
+  top:0.7rem;
+  right:0.7rem;
+  width:1.9rem;
+  height:1.9rem;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.12);
+  font-size:0.85rem;
+}
+
+/* CONTENT */
+.listing-content{
+  padding:0.45rem 0.05rem;
+}
+
+.top-info{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:0.5rem;
+}
+
+.top-info h5{
+  margin:0;
+  font-size:0.88rem;
+  font-weight:600;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.rating{
+  font-size:0.8rem;
+  white-space:nowrap;
+}
+
+/* TEXT */
+.location,
+.distance{
+  color:#717171;
+  margin:0.08rem 0;
+  font-size:0.8rem;
+}
+
+/* PRICE */
+.price{
+  margin-top:0.3rem;
+  font-size:0.82rem;
+}
+
+.price span{
+  font-weight:700;
+}
+
+/* TAX INFO */
+.tax-info{
+  display:none;
+  color:#008a05;
+  margin-left:0.3rem;
+}
+
+/* EMPTY */
+.empty-state{
+  text-align:center;
+  padding:4rem 1rem;
+}
+
+.empty-state img{
+  width:100px;
+  margin-bottom:1rem;
+  opacity:0.8;
+}
+
+/* RESPONSIVE */
+@media(max-width:1200px){
+
+  .listing-grid{
+    grid-template-columns:repeat(3,1fr);
   }
+
+}
+
+@media(max-width:900px){
+
+  .listing-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .filters-wrapper{
+    flex-direction:column;
+    align-items:stretch;
+    gap:0.4rem;
+  }
+
+  .tax-toggle{
+    width:100%;
+    text-align:center;
+  }
+
+  .listing-grid{
+    grid-template-columns:1fr;
+    gap:1.2rem;
+  }
+
+  .listing-image{
+    height:16rem;
+  }
+
+}
+
+</style>
+
+<script>
+
+// TAX TOGGLE
+const taxswitch = document.getElementById("flexSwitchCheckDefault");
+
+taxswitch.addEventListener("click", () => {
+
+  let taxinfos = document.getElementsByClassName("tax-info");
+
+  for(let info of taxinfos){
+
+    if(info.style.display == "inline"){
+      info.style.display = "none";
+    } else {
+      info.style.display = "inline";
+    }
+
+  }
+
+});
+
+// CATEGORY FILTER
+function filterByCategory(category){
+  window.location.href = `?category=${category}`;
+}
+
 </script>

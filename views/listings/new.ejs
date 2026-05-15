@@ -3,7 +3,13 @@
   <div class="row">
     <div class="col-12 col-md-8 offset-md-2">
       <h1>Add new listing</h1>
-      <form method="post" action="/" novalidate class="needs-validation" enctype="multipart/form-data">
+      <form
+        method="post"
+        action="/"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
         <div class="mb-3">
           <label for="title" class="form-label">Title:</label>
           <input
@@ -27,23 +33,27 @@
           ></textarea>
           <div class="invalid-feedback">Please eneter a short description!</div>
         </div>
-        
+
         <div class="mb-3">
           <label for="image" class="form-label">Upload Image:</label>
           <input
-            name="listing[image]" 
+            name="listing[image]"
             type="file"
             class="form-control"
             required
           />
-         
         </div>
 
         <div class="row">
           <div class="mb-3 col-md-4">
             <label for="form-label" class="price">Price:</label>
-            <input name="listing[price]" class="form-control" placeholder="Enter price here..." required/>
-          <div class="invalid-feedback">Eneter a valid price!</div> 
+            <input
+              name="listing[price]"
+              class="form-control"
+              placeholder="Enter price here..."
+              required
+            />
+            <div class="invalid-feedback">Eneter a valid price!</div>
           </div>
           <div class="mb-3 col-md-8">
             <label for="country" class="form-label">Country:</label>
@@ -70,7 +80,34 @@
           <div class="invalid-feedback">Location should be valid!</div>
         </div>
 
-        
+        <div class="mb-3">
+          <label for="category" class="form-label">Category:</label>
+
+          <select name="listing[category]" class="form-select" required>
+            <option value="">Select Category</option>
+            <option value="trending">Trending</option>
+            <option value="rooms">Rooms</option>
+            <option value="iconic cities">Iconic Cities</option>
+            <option value="mountains">Mountains</option>
+            <option value="castles">Castles</option>
+            <option value="amazing pools">Amazing Pools</option>
+            <option value="camping">Camping</option>
+            <option value="farms">Farms</option>
+            <option value="arctic">Arctic</option>
+            <option value="heritage">Heritage</option>
+            <option value="houseboats">Houseboats</option>
+            <option value="deserts">Deserts</option>
+            <option value="beach">Beach</option>
+            <option value="city">City</option>
+            <option value="island">Island</option>
+            <option value="forest">Forest</option>
+            <option value="river">River</option>
+            <option value="snow">Snow</option>
+            <option value="coastal">Coastal</option>
+          </select>
+
+          <div class="invalid-feedback">Please select a category!</div>
+        </div>
         <button class="btn btn-dark add-btn">Add</button>
         <br /><br />
       </form>

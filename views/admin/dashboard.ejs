@@ -1,0 +1,130 @@
+<h1 style="margin-bottom: 5px;">Admin Dashboard</h1>
+<p style="color:#666; margin-top:0;">Overview of listings activity</p>
+
+<hr />
+
+<!-- STATS CARDS -->
+<div style="
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+">
+
+  <!-- Pending -->
+  <div style="
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  ">
+    <h3 style="margin:0;">🟡 Pending</h3>
+    <p style="font-size:24px; margin:10px 0;"><%= pendingCount %></p>
+  </div>
+
+  <!-- Approved -->
+  <div style="
+    background:#ecfdf5;
+    border:1px solid #a7f3d0;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  ">
+    <h3 style="margin:0;">🟢 Approved</h3>
+    <p style="font-size:24px; margin:10px 0;"><%= approvedCount %></p>
+  </div>
+
+  <!-- Rejected -->
+  <div style="
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  ">
+    <h3 style="margin:0;">🔴 Rejected</h3>
+    <p style="font-size:24px; margin:10px 0;"><%= rejectedCount %></p>
+  </div>
+
+</div>
+
+<hr style="margin:30px 0;" />
+
+<!-- RECENT LISTINGS -->
+<h2>Recent Listings</h2>
+
+<div style="
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:10px;
+">
+
+  <% recentListings.forEach(listing => { %>
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 15px;
+      border:1px solid #eee;
+      border-radius:10px;
+      background:#fff;
+    ">
+      
+      <div>
+        <strong><%= listing.title %></strong>
+        <p style="margin:0; color:#777; font-size:13px;">
+          Status: <%= listing.status %>
+        </p>
+      </div>
+
+      <!-- STATUS BADGE -->
+      <div>
+        <% if (listing.status === "pending") { %>
+          <span style="background:#facc15; padding:4px 8px; border-radius:6px;">Pending</span>
+        <% } else if (listing.status === "approved") { %>
+          <span style="background:#22c55e; color:white; padding:4px 8px; border-radius:6px;">Approved</span>
+        <% } else { %>
+          <span style="background:#ef4444; color:white; padding:4px 8px; border-radius:6px;">Rejected</span>
+        <% } %>
+      </div>
+
+    </div>
+  <% }) %>
+
+</div>
+
+<hr style="margin:30px 0;" />
+
+<!-- NAVIGATION -->
+<div style="display:flex; gap:10px;">
+  <a href="/admin/listings" style="
+    padding:10px 15px;
+    background:#111;
+    color:#fff;
+    border-radius:8px;
+    text-decoration:none;
+  ">
+    Manage Listings
+  </a>
+
+  <a href="/admin/users" style="
+    padding:10px 15px;
+    background:#f3f4f6;
+    color:#111;
+    border-radius:8px;
+    text-decoration:none;
+  ">
+    Manage Users
+  </a>
+  <a href="/admin/reviews" style="
+    padding:10px 15px;
+    background:#f3f4f6;
+    color:#111;
+    border-radius:8px;
+    text-decoration:none;
+  ">
+    Manage Reviews
+  </a>
+</div>

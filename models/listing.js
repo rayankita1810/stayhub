@@ -11,40 +11,67 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    url:String,
-    filename:String,
+    url: String,
+    filename: String,
   },
   price: Number,
   location: String,
   country: String,
-  reviews:[
+  reviews: [
     {
-      type:Schema.Types.ObjectId,
-      ref:Review,
-    }
+      type: Schema.Types.ObjectId,
+      ref: Review,
+    },
   ],
-  owner:{
-    type:Schema.Types.ObjectId,
-    ref:User,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: User,
   },
   geometry: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
-      enum: ['Point'], // 'location.type' must be 'Point'
-      required: true
+      enum: ["Point"], // 'location.type' must be 'Point'
+      required: true,
     },
     coordinates: {
       type: [Number],
-      required: true
-    }
+      required: true,
+    },
   },
-  category:{
-    type:String,
-    enum:["trending","rooms","iconic cities","mountains","castles","amazing pools","camping","farms","arctic","heritage","houseboats","deserts"],
+  category: {
+    type: String,
+    enum: [
+      "trending",
+      "rooms",
+      "iconic cities",
+      "mountains",
+      "castles",
+      "amazing pools",
+      "camping",
+      "farms",
+      "arctic",
+      "heritage",
+      "houseboats",
+      "deserts",
+      "beach",
+      "city",
+      "island",
+      "forest",
+      "river",
+      "snow",
+      "coastal",
+    ],
+  },
+  status: {
+    type: String,
+    enum: ["pending", "approved", "rejected"],
+    default: "pending",
+  },
+});
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
 });
-listingSchema.post("findOneAndDelete",async(listing)=>{
-  if(listing){await Review.deleteMany({_id:{$in:listing.reviews}});}
-})
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;

@@ -3,7 +3,7 @@ const User = require("../models/user");
 module.exports.showSignupPage = (req, res) => {
   res.render("users/signup.ejs");
 };
-module.exports.signup = async (req, res) => {
+module.exports.signup = async (req, res, next) => {
   try {
     let { username, email, password } = req.body;
     const newuser = new User({ email, username });
@@ -36,4 +36,17 @@ module.exports.logout = (req, res) => {
     req.flash("success", "You are logged out now!");
     res.redirect("/");
   });
+};
+module.exports.isAdmin = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    req.flash("error", "You must be logged in");
+    return res.redirect("/login");
+  }
+
+  if (!req.user.isAdmin) {
+    req.flash("error", "You are not authorized");
+    return res.redirect("/");
+  }
+
+  next();
 };

@@ -4,6 +4,7 @@ const passport = require("passport");
 const { savedRedirectUrl } = require("../middleware");
 const router = express.Router({ mergeParams: true });
 const userController = require("../controllers/users.js");
+const { isAdmin } = require("../middleware");
 
 router.route("/signup")
 .get(userController.showSignupPage)
@@ -19,8 +20,6 @@ router.route("/login")
   }),
   userController.login
 );
-
-
 router.get("/logout", userController.logout);
 
 module.exports = router;

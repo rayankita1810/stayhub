@@ -53,3 +53,19 @@ module.exports.validateReview = (req,res,next)=>{
     next();
   }
 }
+module.exports.isAdmin = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    return res.status(403).send("Access denied");
+  }
+  next();
+};
+module.exports.isNotBlocked = async (req, res, next) => {
+  if (req.user && req.user.isBlocked) {
+    req.logout(() => {
+      req.flash("error", "You are blocked by admin");
+      return res.redirect("/login");
+    });
+  } else {
+    next();
+  }
+};

@@ -8,18 +8,21 @@ const reviewSchema = new Schema({
   },
   rating: {
     type: Number,
-    min:1,
-    max:5,
+    min: 1,
+    max: 5,
   },
   created_at: {
     type: Date,
-    default:Date.now(),
+    default: Date.now(),
   },
-  author:{
+  author: {
     type: Schema.Types.ObjectId,
-    ref:"User",
-  }
-  
+    ref: "User",
+  },
+  listing: {
+    type: Schema.Types.ObjectId,
+    ref: "Listing",
+  },
 });
 
 const Review = mongoose.model("Review", reviewSchema);

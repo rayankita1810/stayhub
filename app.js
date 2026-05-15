@@ -18,6 +18,9 @@ const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
+const adminRoutes = require("./routes/admin");
+const dns = require("dns"); 
+dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 let dburl = process.env.ATLASDB_URL;
 async function main() {
@@ -79,9 +82,12 @@ app.use((req, res, next) => {
   res.locals.currUser = req.user;
   next();
 });
+
+app.use("/admin", adminRoutes);
+
 app.use("/", userRouter);
-app.use("/", listingRouter);
 app.use("/:id/reviews", reviewRouter);
+app.use("/", listingRouter);
 
 
 app.use((req, res, next) => {

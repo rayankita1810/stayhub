@@ -1,36 +1,30 @@
 const Listing = require("../models/listing");
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
-// module.exports.index = async (req, res) => {
-//   const allListings = await Listing.find({});
-//   res.render("listings/index.ejs", { allListings });
-// };
-
 module.exports.index = async (req, res) => {
-  const { category } = req.query;
-  const { search } = req.query;
+  const filter = {
+    status: "approved",
+  };
 
-  let allListings;
-
-  if (category) {
-    allListings = await Listing.find({ category });
-  } 
-  else if(search){
-    allListings = await Listing.find({
-      $or: [
-        { title: { $regex: search, $options: "i" } },
-        { location: { $regex: search, $options: "i" } }
-      ]
-    });
-  }
-  else {
-    allListings = await Listing.find({});
+  if (req.query.category) {
+    filter.category = req.query.category;
   }
 
-  res.render("listings/index.ejs", { allListings,
-    selectedCategory: category || null });
+  if (req.query.search) {
+    filter.$or = [
+      { title: { $regex: req.query.search, $options: "i" } },
+      { location: { $regex: req.query.search, $options: "i" } },
+    ];
+  }
+
+  const allListings = await Listing.find(filter);
+
+  res.render("listings/index.ejs", {
+    allListings,
+    selectedCategory: req.query.category || null,
+  });
 };
 module.exports.renderNewForm = async (req, res) => {
   res.render("listings/new.ejs");
@@ -54,11 +48,12 @@ module.exports.showAllListings = async (req, res) => {
 };
 
 module.exports.addNewListing = async (req, res, next) => {
- let response = await geocodingClient.forwardGeocode({
-  query: req.body.listing.location,
-  limit: 1
-})
-  .send();
+  let response = await geocodingClient
+    .forwardGeocode({
+      query: req.body.listing.location,
+      limit: 1,
+    })
+    .send();
   // console.log("response", response.body.features[0].geometry);
   let url = req.file.path;
 
@@ -68,7 +63,8 @@ module.exports.addNewListing = async (req, res, next) => {
   let newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   newListing.image = { url, filename };
-  newListing.geometry=response.body.features[0].geometry;
+  newListing.geometry = response.body.features[0].geometry;
+  newListing.status = "pending";
   await newListing.save();
 
   req.flash("success", "New listing added");
@@ -96,7 +92,7 @@ module.exports.saveEditedData = async (req, res) => {
   // console.log("57path", req.file);
 
   // if location has changed then update location
-    if (req.body.listing.location) {
+  if (req.body.listing.location) {
     let geoResponse = await geocodingClient
       .forwardGeocode({
         query: req.body.listing.location,

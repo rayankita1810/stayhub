@@ -27,8 +27,11 @@ const mongoose = require("mongoose");
 const Listing = require("../models/listing");
 const User = require("../models/user");
 const initData = require("./data");
+const dns = require("dns"); 
+dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 const dbUrl = process.env.ATLASDB_URL;
+console.log(dbUrl);
 
 async function main() {
   await mongoose.connect(dbUrl);
